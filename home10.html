@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GreenStemGlobal — EU Food Sourcing Redefined</title>
+  <meta name="description" content="Revolutionary EU food sourcing with complete A-Z traceability and sustainability at its core. Reliable, transparent, and locally-driven solutions." />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="GreenStemGlobal — The Future of Food Supply Chain" />
+  <meta property="og:description" content="Complete transparency. Zero compromise. The most advanced food sourcing platform in Europe." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://greenstemglobal.de/" />
+  <meta property="og:image" content="img/logo_1.png" />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- GSAP for animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
+  
+  <!-- Alpine.js for interactivity -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: '#0EA5E9',
+              dark: '#0369A1',
+              mint: '#34D399'
+            }
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'glow': 'glow 2s ease-in-out infinite alternate',
+            'shimmer': 'shimmer 3s linear infinite',
+            'gradient': 'gradient 8s ease infinite',
+            'morph': 'morph 8s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'slide-up': 'slideUp 0.5s ease-out',
+            'fade-in': 'fadeIn 0.8s ease-out'
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-20px)' }
+            },
+            glow: {
+              '0%': { boxShadow: '0 0 20px rgba(14,165,233,0.5)' },
+              '100%': { boxShadow: '0 0 30px rgba(14,165,233,0.8), 0 0 60px rgba(52,211,153,0.4)' }
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-1000px 0' },
+              '100%': { backgroundPosition: '1000px 0' }
+            },
+            gradient: {
+              '0%, 100%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' }
+            },
+            morph: {
+              '0%': { borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' },
+              '50%': { borderRadius: '30% 60% 70% 40% / 50% 60% 30% 60%' },
+              '100%': { borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(100px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' }
+            },
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' }
+            }
+          },
+          backgroundImage: {
+            'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+            'gradient-mesh': 'url("data:image/svg+xml,%3Csvg width="100" height="100" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3Cpattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"%3E%3Cpath d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/%3E%3C/pattern%3E%3C/defs%3E%3Crect width="100" height="100" fill="url(%23grid)" /%3E%3C/svg%3E")'
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    /* Custom styles */
+    .glassmorphism {
+      background: linear-gradient(135deg, rgba(14,165,233,0.1) 0%, rgba(52,211,153,0.1) 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .bg-grid {
+      background-image: radial-gradient(rgba(14,165,233,0.15) 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+    
+    .tech-grid {
+      background-image: linear-gradient(rgba(14,165,233,0.2) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(14,165,233,0.2) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    
+    .gradient-border {
+      background: linear-gradient(90deg, #0ea5e9, #34d399, #0ea5e9);
+      background-size: 200% 100%;
+      animation: gradient 3s ease infinite;
+    }
+    
+    .text-gradient {
+      background: linear-gradient(135deg, #0ea5e9 0%, #34d399 50%, #059669 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .particle-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    .particle {
+      position: absolute;
+      background: radial-gradient(circle, rgba(14,165,233,0.8) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    
+    .morphing-blob {
+      position: absolute;
+      background: linear-gradient(135deg, rgba(14,165,233,0.3) 0%, rgba(52,211,153,0.3) 100%);
+      filter: blur(40px);
+      animation: morph 8s ease-in-out infinite;
+    }
+    
+    .hover-lift {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .hover-lift:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    
+    .shimmer {
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      background-size: 1000px 100%;
+      animation: shimmer 3s linear infinite;
+    }
+    
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.1);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #0ea5e9, #34d399);
+      border-radius: 5px;
+    }
+    
+    /* Loading animation */
+    .loading-dots span {
+      animation: blink 1.4s infinite both;
+    }
+    
+    .loading-dots span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    
+    .loading-dots span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    
+    @keyframes blink {
+      0%, 80%, 100% { opacity: 0; }
+      40% { opacity: 1; }
+    }
+    
+    /* Perspective card effect */
+    .perspective-card {
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+    }
+    
+    .perspective-card:hover {
+      transform: rotateY(5deg) rotateX(-5deg);
+    }
+  </style>
+</head>
+<body x-data="{ 
+  mobileMenu: false, 
+  currentLang: 'en', 
+  showChat: false,
+  translations: {
+    en: {
+      hero_title: 'A new standard for EU food sourcing with',
+      hero_subtitle: 'complete A-Z traceability',
+      hero_desc: 'Direct from premium farms to your business. Complete transparency. Zero compromise.',
+      cta_source: 'Source Premium Produce',
+      cta_contact: 'Contact Sales',
+      features_title: 'Supply Chain Excellence',
+      products: 'Products',
+      about: 'About',
+      contact: 'Contact',
+      solutions: 'Solutions'
+    },
+    de: {
+      hero_title: 'Ein neuer Standard für EU-Lebensmittelbeschaffung mit',
+      hero_subtitle: 'vollständiger A-Z-Rückverfolgbarkeit',
+      hero_desc: 'Direkt von Premium-Farmen zu Ihrem Unternehmen. Vollständige Transparenz. Keine Kompromisse.',
+      cta_source: 'Premium-Produkte beziehen',
+      cta_contact: 'Vertrieb kontaktieren',
+      features_title: 'Lieferketten-Exzellenz',
+      products: 'Produkte',
+      about: 'Über uns',
+      contact: 'Kontakt',
+      solutions: 'Lösungen'
+    },
+    fi: {
+      hero_title: 'Uusi standardi EU:n elintarvikehankinnoille',
+      hero_subtitle: 'täydellisellä A-Z jäljitettävyydellä',
+      hero_desc: 'Suoraan premium-tiloilta yrityksellesi. Täydellinen läpinäkyvyys. Ei kompromisseja.',
+      cta_source: 'Hanki Premium-tuotteita',
+      cta_contact: 'Ota yhteyttä myyntiin',
+      features_title: 'Toimitusketjun huippuosaaminen',
+      products: 'Tuotteet',
+      about: 'Tietoa meistä',
+      contact: 'Yhteystiedot',
+      solutions: 'Ratkaisut'
+    }
+  },
+  t(key) { return this.translations[this.currentLang][key] || this.translations.en[key]; }
+}" 
+      class="bg-neutral-950 text-white">
+  
+  <!-- Animated Background -->
+  <div class="fixed inset-0 -z-10 overflow-hidden">
+    <div class="particle-bg" id="particles"></div>
+    <div class="absolute -top-24 -left-24 h-[500px] w-[500px] bg-brand/20 blur-3xl rounded-full"></div>
+    <div class="absolute -bottom-24 -right-24 h-[500px] w-[500px] bg-brand-mint/20 blur-3xl rounded-full"></div>
+    <div class="absolute inset-0 bg-grid opacity-30 dark:opacity-30"></div>
+  </div>
+  
+  <!-- Advanced Header -->
+  <header class="sticky top-0 z-50 backdrop-blur bg-neutral-950/70 border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <a href="#" class="flex items-center group">
+          <img src="img/our_logo.png" alt="GreenStemGlobal" class="h-12 w-auto" />
+        </a>
+        
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center gap-8">
+          <a href="#features" class="relative group">
+<span class="hover:text-brand transition">Features</span>
+<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-brand to-brand-mint group-hover:w-full transition-all"></span>
+          </a>
+          <a href="#products" class="relative group">
+<span class="hover:text-brand transition" x-text="t('products')">Products</span>
+<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-brand to-brand-mint group-hover:w-full transition-all"></span>
+          </a>
+          <a href="#technology" class="relative group">
+<span class="hover:text-brand transition">Technology</span>
+<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-brand to-brand-mint group-hover:w-full transition-all"></span>
+          </a>
+          <a href="#sustainability" class="relative group">
+<span class="hover:text-brand transition">Sustainability</span>
+<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-brand to-brand-mint group-hover:w-full transition-all"></span>
+          </a>
+          <a href="#contact" class="relative group">
+<span class="hover:text-brand transition" x-text="t('contact')">Contact</span>
+<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-brand to-brand-mint group-hover:w-full transition-all"></span>
+          </a>
+        </nav>
+        
+        <!-- Right Actions -->
+        <div class="flex items-center gap-4">
+          <!-- Language Selector -->
+          <div class="flex items-center gap-1 px-2 py-1 rounded-lg glassmorphism">
+            <button @click="currentLang = 'en'" :class="currentLang === 'en' ? 'text-brand-400 font-bold' : 'text-white/60 hover:text-white'" class="px-2 py-1 text-sm transition-colors">EN</button>
+            <span class="text-white/20">|</span>
+            <button @click="currentLang = 'de'" :class="currentLang === 'de' ? 'text-brand-400 font-bold' : 'text-white/60 hover:text-white'" class="px-2 py-1 text-sm transition-colors">DE</button>
+            <span class="text-white/20">|</span>
+            <button @click="currentLang = 'fi'" :class="currentLang === 'fi' ? 'text-brand-400 font-bold' : 'text-white/60 hover:text-white'" class="px-2 py-1 text-sm transition-colors">FI</button>
+          </div>
+          
+          
+          <!-- CTA Button -->
+          <a href="#contact" class="hidden sm:block px-4 py-2 rounded-xl bg-brand text-neutral-950 font-semibold hover:bg-brand/90 shadow-lg transition">
+            Request Access
+          </a>
+          
+          <!-- Mobile Menu Toggle -->
+          <button @click="mobileMenu = !mobileMenu" class="lg:hidden p-2 rounded-lg glassmorphism">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path x-show="!mobileMenu" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+              <path x-show="mobileMenu" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div x-show="mobileMenu" x-transition class="lg:hidden border-t border-white/10">
+      <nav class="px-4 py-4 space-y-2">
+        <a href="#features" class="block px-4 py-2 rounded-lg hover:bg-white/10 transition">Features</a>
+        <a href="#products" class="block px-4 py-2 rounded-lg hover:bg-white/10 transition">Products</a>
+        <a href="#technology" class="block px-4 py-2 rounded-lg hover:bg-white/10 transition">Technology</a>
+        <a href="#sustainability" class="block px-4 py-2 rounded-lg hover:bg-white/10 transition">Sustainability</a>
+        <a href="#contact" class="block px-4 py-2 rounded-lg hover:bg-white/10 transition">Contact</a>
+      </nav>
+    </div>
+  </header>
+  
+  <!-- Hero Section with Advanced Animation -->
+  <section class="relative py-12 md:py-16 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Left Content -->
+        <div class="space-y-8 animate-fade-in">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glassmorphism border border-brand-500/30" x-data="countdown()">
+            <span class="relative flex h-3 w-3">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-500"></span>
+            </span>
+            <span class="text-sm font-semibold text-brand-400" x-text="timeLeft"></span>
+          </div>
+          
+          <h1 class="text-5xl lg:text-7xl font-bold leading-tight">
+            <span class="block" x-text="t('hero_title')">A new standard for EU food sourcing with</span>
+            <span class="block text-gradient" x-text="t('hero_subtitle')">complete A-Z traceability</span>
+          </h1>
+          
+          <p class="text-xl text-white/80 max-w-xl" x-text="t('hero_desc')">
+            Direct from premium farms to your business. Complete transparency. Zero compromise.
+          </p>
+          
+          <div class="flex flex-wrap gap-4">
+            <button class="group relative px-8 py-4 rounded-xl font-semibold text-white overflow-hidden">
+              <span class="absolute inset-0 bg-brand transition-transform group-hover:scale-105"></span>
+              <span class="relative flex items-center gap-2">
+                Request Access
+                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+              </span>
+            </button>
+            <div class="flex items-center gap-6 text-sm text-white/60">
+              <span class="inline-flex items-center gap-2">
+                <span class="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Real-time tracking</span>
+              </span>
+              <span>EU • MRL Compliant</span>
+              <span>GlobalGAP+</span>
+            </div>
+          </div>
+          
+          <!-- Live Stats -->
+          <div class="grid grid-cols-3 gap-4 pt-8">
+            <div class="text-center">
+              <div class="text-3xl font-bold text-gradient" data-counter="150">0</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400">Partner Farms</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-gradient" data-counter="99.9">0</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400">% Traceability</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-gradient" data-counter="24">0</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400">Countries</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right Visual - Supply Chain Cards -->
+        <div class="relative">
+          <!-- Supply Chain Cards Visualization -->
+          <div class="grid grid-cols-3 gap-6" x-data="supplyChainRotator()">
+            <!-- Mock Data Disclaimer -->
+            <div class="col-span-3 text-center mb-2">
+              <span class="text-xs text-white/40 italic">* Live data coming December 2025 - Currently showing sample metrics</span>
+            </div>
+            <!-- Farms Column -->
+            <div>
+              <h4 class="text-sm font-bold text-brand-400 uppercase tracking-wide text-center mb-4">Farms*</h4>
+              <div class="relative h-[500px] overflow-hidden">
+                <div class="absolute inset-0 transition-transform duration-700" :style="`transform: translateY(-${farmIndex * 50}%)`">
+                  <template x-for="farm in farms" :key="farm.name">
+                    <div class="h-[250px] p-2">
+                      <div class="h-full glassmorphism rounded-xl p-5 border-2 border-green-500/40 hover:border-green-400/60 transition-all flex flex-col">
+                        <div class="flex items-center gap-3 mb-4">
+                          <span class="text-3xl">🌾</span>
+                          <span class="text-base font-bold" x-text="farm.name"></span>
+                        </div>
+                        <div class="space-y-3 text-sm text-white/80">
+                          <div class="flex items-center gap-2">
+                            <span>📍</span>
+                            <span x-text="farm.location"></span>
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <span>🌱</span>
+                            <span x-text="farm.products"></span>
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <span>☀️</span>
+                            <span x-text="farm.weather"></span>
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <span>📏</span>
+                            <span x-text="farm.distance"></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Cold Storage Column -->
+            <div>
+              <h4 class="text-sm font-bold text-brand-400 uppercase tracking-wide text-center mb-4">Cold Storage*</h4>
+              <div class="relative h-[500px] overflow-hidden">
+                <div class="absolute inset-0 transition-transform duration-700" :style="`transform: translateY(-${storageIndex * 50}%)`">
+                  <template x-for="storage in storages" :key="storage.name">
+                    <div class="h-[250px] p-2">
+                      <div class="h-full glassmorphism rounded-xl p-5 border-2 border-blue-500/40 hover:border-blue-400/60 transition-all flex flex-col">
+                        <div class="flex items-center gap-3 mb-4">
+                          <span class="text-3xl">❄️</span>
+                          <span class="text-base font-bold" x-text="storage.name"></span>
+                        </div>
+                        <div class="space-y-3 text-sm text-white/80">
+                          <div class="flex items-center gap-2">
+                            <span>📍</span>
+                            <span x-text="storage.location"></span>
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <span>🌡️</span>
+                            <span x-text="storage.temp"></span>
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <span>📦</span>
+                            <span x-text="storage.capacity"></span>
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <span>🔒</span>
+                            <span x-text="storage.status"></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Delivery Column -->
+            <div>
+              <h4 class="text-sm font-bold text-brand-400 uppercase tracking-wide text-center mb-4">Delivery*</h4>
+              <div class="relative h-[500px] overflow-hidden">
+                <div class="absolute inset-0 transition-transform duration-700" :style="`transform: translateY(-${truckIndex * 50}%)`">
+                  <template x-for="truck in trucks" :key="truck.name">
+                    <div class="h-[250px] p-2">
+                      <div class="h-full glassmorphism rounded-xl p-5 border-2 border-orange-500/40 hover:border-orange-400/60 transition-all flex flex-col">
+                        <div class="flex items-center gap-3 mb-4">
+                          <span class="text-3xl">🚚</span>
+                          <span class="text-base font-bold" x-text="truck.name"></span>
+                        </div>
+                        <div class="space-y-3 text-sm text-white/80">
+                          <div class="flex items-center gap-2">
+                            <span>📍</span>
+                            <span x-text="truck.destination"></span>
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <span>📦</span>
+                            <span x-text="truck.products"></span>
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <span>⚖️</span>
+                            <span x-text="truck.load"></span>
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <span>⏱️</span>
+                            <span x-text="truck.eta"></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Features Section with Cards -->
+  <section id="features" class="py-8 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+          <span class="bg-gradient-to-r from-brand to-brand-mint bg-clip-text text-transparent">Why GreenStemGlobal?</span>
+        </h2>
+        <p class="text-lg text-white/70 max-w-3xl mx-auto">
+          Built in Germany for European buyers. Complete transparency, radical traceability, designed to scale across continents.
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Feature Card 1 -->
+        <div class="group hover-lift">
+          <div class="h-full p-6 rounded-2xl bg-gradient-to-br from-neutral-900 to-neutral-900/50 border border-white/10 hover:border-brand/30 transition">
+            <div class="w-12 h-12 rounded-xl bg-brand/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">Complete A-Z Traceability</h3>
+            <p class="text-sm text-white/70">
+              From seed to delivery - track every step with QR codes, blockchain verification, and real-time updates.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Feature Card 2 -->
+        <div class="group hover-lift">
+          <div class="h-full p-6 rounded-2xl bg-gradient-to-br from-neutral-900 to-neutral-900/50 border border-white/10 hover:border-brand/30 transition">
+            <div class="w-12 h-12 rounded-xl bg-brand/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">EU Compliance Guaranteed</h3>
+            <p class="text-sm text-white/70">
+              MRL compliant, GlobalGAP certified, with additional certifications expanding quarterly.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Feature Card 3 -->
+        <div class="group hover-lift">
+          <div class="h-full p-6 rounded-2xl bg-gradient-to-br from-neutral-900 to-neutral-900/50 border border-white/10 hover:border-brand/30 transition">
+            <div class="w-12 h-12 rounded-xl bg-brand/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">Multi-Origin Network</h3>
+            <p class="text-sm text-white/70">
+              Starting with Kenya, expanding to Egypt, Morocco, South Africa and more partners quarterly.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Products Section with Enhanced Visuals -->
+  <section id="products" class="py-8 border-t border-white/5 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+          <span class="bg-gradient-to-r from-brand to-brand-mint bg-clip-text text-transparent">Current Product Range</span>
+        </h2>
+        <p class="text-lg text-white/70 max-w-3xl mx-auto">
+          Premium quality produce with complete traceability. More products added quarterly.
+        </p>
+      </div>
+      
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Product Card 1 -->
+        <div class="group relative hover-lift">
+          <div class="absolute inset-0 bg-gradient-to-br from-red-500/20 to-orange-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div class="relative glassmorphism rounded-2xl overflow-hidden border border-white/10">
+            <div class="aspect-square overflow-hidden">
+              <img src="img/chilies.jpg" 
+                   alt="Premium Chilies" 
+                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">Chilies</h3>
+              <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">Fresh & Dried • Multiple varieties</p>
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-semibold text-brand-500">View Details</span>
+                <svg class="w-5 h-5 text-brand-500 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Product Card 2 -->
+        <div class="group relative hover-lift">
+          <div class="absolute inset-0 bg-gradient-to-br from-green-500/20 to-emerald-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div class="relative glassmorphism rounded-2xl overflow-hidden border border-white/10">
+            <div class="aspect-square overflow-hidden">
+              <img src="img/french_beans.jpg" 
+                   alt="French Beans" 
+                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">French Beans</h3>
+              <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">Air-freighted daily for maximum freshness</p>
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-semibold text-brand-500">View Details</span>
+                <svg class="w-5 h-5 text-brand-500 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Product Card 3 -->
+        <div class="group relative hover-lift">
+          <div class="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div class="relative glassmorphism rounded-2xl overflow-hidden border border-white/10">
+            <div class="aspect-square overflow-hidden">
+              <img src="img/passion_fruit.jpg" 
+                   alt="Passion Fruit" 
+                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">Passion Fruit</h3>
+              <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">Grade A quality with consistent year-round supply</p>
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-semibold text-brand-500">View Details</span>
+                <svg class="w-5 h-5 text-brand-500 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Product Card 4 -->
+        <div class="group relative hover-lift">
+          <div class="absolute inset-0 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div class="relative glassmorphism rounded-2xl overflow-hidden border border-white/10">
+            <div class="aspect-square overflow-hidden">
+              <img src="img/mangoes.jpg" 
+                   alt="Premium Mangoes" 
+                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">Premium Mangoes</h3>
+              <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">Multiple varieties, perfectly ripened for export</p>
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-semibold text-brand-500">View Details</span>
+                <svg class="w-5 h-5 text-brand-500 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-12">
+        <button class="px-8 py-4 rounded-xl font-semibold glassmorphism hover:bg-white/10 transition border border-brand-500/30">
+          View Full Catalog
+        </button>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Sustainability Section -->
+  <section id="sustainability" class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+            <span class="text-gradient">Sustainability First</span>
+          </h2>
+          <p class="text-xl text-white/80 mb-8">
+            Our commitment to environmental responsibility drives every decision we make. From carbon-neutral operations to fair trade partnerships, we're building a sustainable future for food supply.
+          </p>
+          
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-green-500/20 to-emerald-500/20 border border-green-500/30 flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold mb-2 text-white">Carbon Neutral by 2026</h3>
+                <p class="text-white/70">Complete offset of all emissions across our supply chain through verified carbon credits and renewable energy.</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold mb-2 text-white">Water Conservation</h3>
+                <p class="text-white/70">Partner farms use 40% less water through precision irrigation and drought-resistant crop varieties.</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/30 flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold mb-2 text-white">Zero Waste Initiative</h3>
+                <p class="text-white/70">100% biodegradable packaging and comprehensive recycling programs at all facilities.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="relative">
+          <div class="absolute inset-0 bg-gradient-to-br from-brand/20 to-brand-mint/20 blur-3xl"></div>
+          <div class="relative glassmorphism rounded-2xl p-8">
+            <div class="grid sm:grid-cols-3 gap-6">
+              <div class="p-6 rounded-2xl glassmorphism border border-green-500/20">
+                <div class="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-center text-white">Carbon Neutral Goal</h3>
+                <p class="text-sm text-white/60 mt-2 text-center">2026 target for all operations</p>
+              </div>
+              
+              <div class="p-6 rounded-2xl glassmorphism border border-blue-500/20">
+                <div class="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-center text-white">Fair Trade</h3>
+                <p class="text-sm text-white/60 mt-2 text-center">Direct partnerships with farmers</p>
+              </div>
+              
+              <div class="p-6 rounded-2xl glassmorphism border border-purple-500/20">
+                <div class="w-12 h-12 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-center text-white">Certifications</h3>
+                <p class="text-sm text-white/60 mt-2 text-center">GlobalGAP+ expanding quarterly</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Technology Dashboard Preview -->
+  <section id="technology" class="py-8 border-t border-white/5 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-mesh opacity-20"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+          <span class="bg-gradient-to-r from-brand to-brand-mint bg-clip-text text-transparent">Free Transparency Tools</span>
+        </h2>
+        <p class="text-lg text-white/70 max-w-3xl mx-auto">
+          Every purchase comes with complete transparency. Know your farmer, track your food's journey, and discover the story behind every harvest.
+        </p>
+      </div>
+      
+      <!-- Dashboard Preview Cards -->
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- AI Analytics -->
+        <div class="p-6 rounded-2xl bg-gradient-to-br from-neutral-900 to-neutral-900/50 border border-white/10 hover:border-brand/30 transition">
+          <div class="w-12 h-12 rounded-xl bg-brand/20 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Know Your Farmer</h3>
+          <p class="text-sm text-white/70 mb-4">
+            Connect directly with the farmers who grow your food. See their story, farming practices, and dedication to quality.
+          </p>
+          <div class="text-2xl font-bold bg-gradient-to-r from-brand to-brand-mint bg-clip-text text-transparent">1:1</div>
+          <div class="text-xs text-white/60">Direct farmer connection</div>
+        </div>
+
+        <!-- Track Your Food -->
+        <div class="p-6 rounded-2xl bg-gradient-to-br from-neutral-900 to-neutral-900/50 border border-white/10 hover:border-brand/30 transition">
+          <div class="w-12 h-12 rounded-xl bg-brand/20 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Track Your Food</h3>
+          <p class="text-sm text-white/70 mb-4">
+            Follow your produce from farm to table. Temperature, humidity, and location tracking with complete journey visibility.
+          </p>
+          <div class="text-2xl font-bold bg-gradient-to-r from-brand to-brand-mint bg-clip-text text-transparent">A-Z</div>
+          <div class="text-xs text-white/60">Complete traceability</div>
+        </div>
+
+        <!-- Discover Origins -->
+        <div class="p-6 rounded-2xl bg-gradient-to-br from-neutral-900 to-neutral-900/50 border border-white/10 hover:border-brand/30 transition">
+          <div class="w-12 h-12 rounded-xl bg-brand/20 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Discover Origins</h3>
+          <p class="text-sm text-white/70 mb-4">
+            Find the sweetest grapes from Mallorca or discover new varieties. Search by taste, location, or farming method.
+          </p>
+          <div class="text-2xl font-bold bg-gradient-to-r from-brand to-brand-mint bg-clip-text text-transparent">∞</div>
+          <div class="text-xs text-white/60">Endless discovery</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Contact Section -->
+  <section id="contact" class="py-8 border-t border-white/5">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+          <span class="bg-gradient-to-r from-brand to-brand-mint bg-clip-text text-transparent" x-text="t('cta_source')">Source Premium Produce</span>
+        </h2>
+        <p class="text-lg text-white/70">
+          Request product sheets and pilot orders. Experience complete transparency with every purchase.
+        </p>
+      </div>
+      
+      <form class="glassmorphism rounded-2xl p-8 border border-white/10">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-sm font-semibold mb-2">Company Name *</label>
+            <input type="text" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-brand-500 focus:outline-none transition" />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold mb-2">Your Name *</label>
+            <input type="text" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-brand-500 focus:outline-none transition" />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold mb-2">Business Email *</label>
+            <input type="email" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-brand-500 focus:outline-none transition" />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold mb-2">Phone Number</label>
+            <input type="tel" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-brand-500 focus:outline-none transition" />
+          </div>
+          <div class="md:col-span-2">
+            <label class="block text-sm font-semibold mb-2">Products of Interest</label>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" class="w-4 h-4 rounded text-brand-500" />
+                <span>Chilies</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" class="w-4 h-4 rounded text-brand-500" />
+                <span>French Beans</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" class="w-4 h-4 rounded text-brand-500" />
+                <span>Passion Fruit</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" class="w-4 h-4 rounded text-brand-500" />
+                <span>Mangoes</span>
+              </label>
+            </div>
+          </div>
+          <div class="md:col-span-2">
+            <label class="block text-sm font-semibold mb-2">Message</label>
+            <textarea rows="4" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-brand-500 focus:outline-none transition"></textarea>
+          </div>
+        </div>
+        
+        <div class="mt-8 flex flex-col sm:flex-row gap-4 items-center justify-between">
+          <p class="text-sm text-white/60">
+            * Required fields. We'll respond within 24 hours.
+          </p>
+          <button type="submit" class="px-8 py-4 rounded-xl font-semibold text-neutral-950 bg-brand hover:bg-brand/90 shadow-lg transition">
+            Request Product Catalog
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="border-t border-white/10 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <div class="mb-4">
+            <img src="img/our_logo.png" alt="GreenStemGlobal" class="h-10 w-auto" />
+          </div>
+          <p class="text-sm text-white/60">
+            Pioneering the future of sustainable food supply chains across Europe and beyond.
+          </p>
+        </div>
+        
+        <div>
+          <h3 class="font-semibold mb-4">Quick Links</h3>
+          <ul class="space-y-2 text-sm text-white/60">
+            <li><span class="cursor-default">About Us</span></li>
+            <li><span class="cursor-default">How It Works</span></li>
+            <li><span class="cursor-default">Partner Farms</span></li>
+            <li><span class="cursor-default">Certifications</span></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="font-semibold mb-4">Global Presence</h3>
+          <ul class="space-y-2 text-sm text-white/60">
+            <li>Nairobi</li>
+            <li>Hamburg / Frankfurt</li>
+            <li>Jersey City</li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="font-semibold mb-4">Follow Us</h3>
+          <div class="flex gap-4">
+            <div class="w-10 h-10 rounded-lg glassmorphism flex items-center justify-center cursor-not-allowed opacity-60" title="Coming December 5, 2025">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </div>
+            <div class="w-10 h-10 rounded-lg glassmorphism flex items-center justify-center cursor-not-allowed opacity-60" title="Coming December 5, 2025">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+            </div>
+            <div class="w-10 h-10 rounded-lg glassmorphism flex items-center justify-center cursor-not-allowed opacity-60" title="Coming December 5, 2025">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-12 pt-8 border-t border-white/10 text-center text-sm text-gray-600 dark:text-gray-400">
+        <p>© 2025 GreenStemGlobal. All rights reserved. | Privacy Policy | Terms of Service</p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Live Chat Widget -->
+  <div x-show="showChat" x-transition class="fixed bottom-24 right-4 z-50">
+    <div class="glassmorphism rounded-2xl border border-white/10 p-6 w-80">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-semibold">Live Support</h3>
+        <button @click="showChat = false" class="text-gray-400 hover:text-white">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="space-y-4 mb-4 h-64 overflow-y-auto">
+        <div class="flex gap-2">
+          <div class="w-8 h-8 rounded-full bg-brand-500 flex items-center justify-center text-white text-sm">AI</div>
+          <div class="flex-1 bg-white/10 rounded-lg p-3 text-sm">
+            Hello! How can I help you with GreenStemGlobal today?
+          </div>
+        </div>
+      </div>
+      <div class="flex gap-2">
+        <input type="text" placeholder="Type your message..." class="flex-1 px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm focus:outline-none focus:border-brand-500" />
+        <button class="px-4 py-2 rounded-lg bg-brand-500 text-white">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Chat Toggle Button -->
+  <button @click="showChat = !showChat" class="fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-brand-500 to-brand-mint text-white flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
+    <svg x-show="!showChat" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+    </svg>
+    <svg x-show="showChat" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+    </svg>
+  </button>
+  
+  <script>
+    // Initialize particles
+    function createParticles() {
+      const container = document.getElementById('particles');
+      for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.width = Math.random() * 6 + 2 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDuration = Math.random() * 20 + 10 + 's';
+        particle.style.animationDelay = Math.random() * 10 + 's';
+        container.appendChild(particle);
+      }
+    }
+    createParticles();
+    
+    // Counter animation
+    function animateCounters() {
+      const counters = document.querySelectorAll('[data-counter]');
+      counters.forEach(counter => {
+        const target = parseFloat(counter.getAttribute('data-counter'));
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+        
+        const updateCounter = () => {
+          current += increment;
+          if (current < target) {
+            counter.textContent = Math.floor(current);
+            requestAnimationFrame(updateCounter);
+          } else {
+            counter.textContent = target % 1 === 0 ? target : target.toFixed(1);
+          }
+        };
+        
+        // Start animation when element is in viewport
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              updateCounter();
+              observer.unobserve(entry.target);
+            }
+          });
+        });
+        observer.observe(counter);
+      });
+    }
+    animateCounters();
+    
+    
+    // GSAP Animations
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // Animate sections on scroll
+    gsap.utils.toArray('section').forEach(section => {
+      gsap.from(section, {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 80%',
+          end: 'bottom 20%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+    });
+    
+    // Supply Chain Rotator function for Alpine.js
+    function supplyChainRotator() {
+      return {
+        farmIndex: 0,
+        storageIndex: 0,
+        truckIndex: 0,
+        farms: [
+          { name: '2 Butterflies HS', location: 'Soi, Kenya', products: 'Chilies, Beans', weather: 'Sunny 28°C', distance: '287km to port' },
+          { name: 'Kimani Farm', location: 'Makueni, Kenya', products: 'Mangoes, Passion', weather: 'Partly Cloudy 26°C', distance: '195km to port' },
+          { name: 'Mwangi Estate', location: 'Bungoma, Kenya', products: 'French Beans', weather: 'Clear 25°C', distance: '412km to port' },
+          { name: 'Kariuki Gardens', location: 'Kajiado, Kenya', products: 'Avocados, Herbs', weather: 'Overcast 24°C', distance: '89km to port' },
+          { name: 'Njoroge Fields', location: 'Thika, Kenya', products: 'Mixed Vegetables', weather: 'Rainy 22°C', distance: '156km to port' }
+        ],
+        storages: [
+          { name: "Cold Storage 'Soi'", location: 'Soi, Kenya', temp: '-18°C Stable', capacity: '2,400 tons', status: 'Operational 24/7' },
+          { name: "Cold Storage 'Makueni'", location: 'Makueni, Kenya', temp: '-20°C Stable', capacity: '1,800 tons', status: 'Active - 87% Full' },
+          { name: "Cold Storage 'Bungoma'", location: 'Bungoma, Kenya', temp: '-19°C Stable', capacity: '3,200 tons', status: 'Maintenance 2hrs' },
+          { name: "Cold Storage 'Kajiado'", location: 'Kajiado, Kenya', temp: '-17°C Stable', capacity: '2,100 tons', status: 'Ready for Load' },
+          { name: "Cold Storage 'Thika'", location: 'Thika, Kenya', temp: '-21°C Stable', capacity: '2,750 tons', status: 'Processing Batch' }
+        ],
+        trucks: [
+          { name: 'GSG Logik 121', destination: 'Nairobi Airport', products: 'Chilies, Beans', load: '2.4 tons', eta: '3h 45min' },
+          { name: 'GSG Logik 234', destination: 'Mombasa Port', products: 'Mangoes', load: '3.1 tons', eta: '5h 20min' },
+          { name: 'GSG Logik 367', destination: 'JKIA Cargo', products: 'French Beans', load: '1.8 tons', eta: '2h 15min' },
+          { name: 'GSG Logik 489', destination: 'Wilson Airport', products: 'Passion Fruit', load: '2.7 tons', eta: '1h 30min' },
+          { name: 'GSG Logik 512', destination: 'Eldoret Airport', products: 'Mixed Produce', load: '3.5 tons', eta: '4h 10min' }
+        ],
+        init() {
+          setInterval(() => {
+            this.farmIndex = (this.farmIndex + 1) % this.farms.length;
+          }, 3000);
+          
+          setInterval(() => {
+            this.storageIndex = (this.storageIndex + 1) % this.storages.length;
+          }, 3500);
+          
+          setInterval(() => {
+            this.truckIndex = (this.truckIndex + 1) % this.trucks.length;
+          }, 4000);
+        }
+      }
+    }
+    
+    // Countdown function for Alpine.js
+    function countdown() {
+      return {
+        timeLeft: '',
+        init() {
+          this.updateCountdown();
+          setInterval(() => {
+            this.updateCountdown();
+          }, 1000);
+        },
+        updateCountdown() {
+          const targetDate = new Date('December 5, 2025 00:00:00').getTime();
+          const now = new Date().getTime();
+          const distance = targetDate - now;
+          
+          if (distance > 0) {
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            this.timeLeft = `Launch in ${days}d ${hours}h ${minutes}m ${seconds}s`;
+          } else {
+            this.timeLeft = 'Launched!';
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>
